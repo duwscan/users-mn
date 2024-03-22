@@ -13,6 +13,7 @@
     @yield('addition_styles')
 </head>
 <body>
+<x-alert/>
 @yield('content')
 </body>
 </html>

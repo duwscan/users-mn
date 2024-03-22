@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\View\Components\Alert;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,6 +28,6 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        return redirect("/");
+        return redirect("/home")->with(Alert::SESSION_KEY, 'Welcome to the club!');
     }
 }

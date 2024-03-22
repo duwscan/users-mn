@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -20,7 +21,7 @@ class UserController extends Controller
         } else {
             $message = "User with id:" . $id . " not found or already deleted!";
         }
-        return redirect()->route('home')->with(['message' => $message]);
+        return redirect()->route('home')->with(Alert::SESSION_KEY, $message);
     }
 
     public function edit(int $id)
@@ -43,6 +44,6 @@ class UserController extends Controller
         $user->roles()->sync($request->roleIds);
         $user->save();
 
-        return redirect()->route('home')->with(['message' => "Updated user with id:" . $user->id]);
+        return redirect()->route('home')->with(Alert::SESSION_KEY, 'User updated!');
     }
 }
